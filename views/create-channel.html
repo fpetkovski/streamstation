@@ -1,0 +1,52 @@
+
+<div class="modal fade  in" ng-class="{in: animate}" ng-style="{'z-index': 1050 + index*10}" ng-transclude="" modal-window="" index="0" style="z-index: 1050;">
+	<div class="modal ng-scope" id="notifyModal" role="dialog" aria-labelledby="channelDialog">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button ng-click="dismissDialog()" type="button" class="close">
+				<span >&times;</span>
+				<span class="sr-only">Close</span>
+			</button>
+	        <h4 class="modal-title" id="createChannel">Create Channel</h4>
+	      </div>
+	      <div class="modal-body">
+	      	<!-- Start FORM FILIPCOOO -->
+	        <form class="form-horizontal" action="">
+				<fieldset>	
+					<!-- Email input-->
+					<div class="form-group">
+					  <label class="col-md-4 control-label" for="channelname">Channel Name</label>  
+					  <div class="col-md-6">
+					  <input id="channelname" name="channelname" ng-enter="login()" ng-model="model.newChannelName" type="text" placeholder="Johnny's Channel" class="form-control input-md">
+					  </div>
+					</div>
+
+					<div class="form-group">
+						<label class="col-md-4 control-label" for="channelname">Pick a Category</label>  
+						<div class="col-md-6">
+						
+							<multiselect pre-selected="model.preselected.categories" 
+										 model="model.selectedItems" 
+										 options="model.categories">
+							</multiselect>
+						</div>
+					</div>
+				</fieldset>
+				<div ng-show="hasErrors()" class="alert alert-danger" role="alert" style="text-align: center">
+					{{model.error.code}}
+				</div>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" ng-click="dismissDialog()" class="btn btn-default" data-dismiss="modal">Close</button>
+		        <button type="button" ng-model="model.newChannelName" ng-click="createChannel()" ng-disabled="model.loggingIn" class="btn btn-primary" type="submit">
+					<span>Create Channel</span>
+					<!--<span ng-show="model.loggingIn" class="fa fa-circle-o-notch fa-spin"></span>-->
+				</button>
+		      </div>
+	      <!-- END FORM FILIPCOOO -->
+	      </form>
+	    </div>
+	  </div>
+	</div>
+</div>

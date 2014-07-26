@@ -1,0 +1,52 @@
+
+<div class="container">
+	<div class="row">
+		<div class="col-md-3 ">
+			<h2>Channels</h2>
+		</div>
+		<div class="col-md-3">
+			<input type="text" class="form-control" placeholder="Search" ng-model="model.nameFilter">
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<ul class="channellist">
+				<li ng-repeat="channel in channels() | filter:channelFilter">
+					<div class="row">
+						<a href="#/channel/{{channel.channelId()}}">
+							<div class="thumb" style="background:url('{{channel.channelImage()}}'); background-size:cover;"></div>
+						</a>
+					</div>
+					
+					<div class="">
+						<div class="pull-left">
+							<a ng-show="!inEdit(channel.channelKey())" href="#/channel/{{channel.channelId()}}">{{channel.channelName()}}</a>
+							<input style="height: 20px" type="text" ng-enter="renameChannel(channel.channelKey())" 
+									ng-show="inEdit(channel.channelKey())" ng-model="model.channelEdits[channel.channelKey()]"/>
+							<div class="meta">
+								<p class="plays">
+									1330 Plays
+								</p>
+								<p class="watchers">
+									120 Watching
+								</p>
+							</div>
+						</div>
+						<div ng-show="channel.isAdmin()" class="pull-right">
+							<button ng-click="removeChannel(channel.channelKey())" 
+									class="btn btn-default btn-xs glyphicon glyphicon-trash pull-right"></button>
+							
+							<button ng-class="inEdit(channel.channelKey()) ? 'active' : ''"
+									ng-click="toggleRenameChannel(channel.channelKey())" 
+									class="btn btn-default btn-xs glyphicon glyphicon-pencil pull-right"></button>
+							
+
+						</div>
+					</div>
+				</li>
+			</ul>
+		</div>
+		
+
+	</div>
+</div>

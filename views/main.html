@@ -1,0 +1,229 @@
+<div class="container">
+	<div class="row">		
+		<div class="col-lg-8">
+		
+			<p class="alert {{channelAlert().class}}" ng-show="channelReady() && channelAlert().message != ''"> 
+				{{owner()}} {{channelAlert().message}} <b>{{channelName()}}</b>
+			</p>
+		
+			<div class="channeldesc"></div>
+    		
+			<div class="video-player">
+				<div class="js-video [vimeo, widescreen]">
+					<object classid="clsid:D27CDB6E-AE6D-11cf-96B8-444553540000">
+						<!--[if !IE]>-->
+						<embed id="ytplayer"
+							src="http://www.youtube.com/apiplayer?enablejsapi=1&version=3&playerapiid=ytplayer"
+							type="application/x-shockwave-flash" 
+							allowscriptaccess="always" allowfullscreen="true">
+						</embed>
+						<!--<![endif]-->
+					</object>
+				</div>
+				<div class="row">
+					<div class="col-md-12">
+						<video-timetrack></video-timetrack>
+						<!--<div class="js-video-timetrack"><div class="js-video-timetrack-current" ng-style="model.timetrackStyle"></div></div>-->
+					</div>
+				</div>
+				<div class="video-controls row">
+					<div class="col-md-12">
+						<a ng-show="channelReady() && isAdmin()" class="btn btn-inverse" ng-click="prev()">
+							<i class="fa fa-backward pull-left"></i>
+						</a>
+						<a ng-show="channelReady() && isAdmin()" class="btn btn-inverse" ng-click="play()">
+							<i class="fa fa-play pull-left"></i>
+						</a>
+						<a ng-show="channelReady() && isAdmin()" class="btn btn-inverse" ng-click="pause()">
+							<i class="fa fa-pause pull-left"></i>
+						</a>
+						<a ng-show="channelReady() && isAdmin()" class="btn btn-inverse" ng-click="stop()">
+							<i class="fa fa-stop pull-left"></i>
+						</a>
+						<a ng-show="channelReady() && isAdmin()" class="btn btn-inverse" ng-click="next()">
+							<i class="fa fa-forward pull-left"></i>
+						</a>
+						<a ng-show="channelReady()" class="btn btn-inverse pull-right" ng-click="fullScreen()">
+							<i class="fa fa-expand"> </i>
+						</a>
+						<a ng-show="channelReady()" class="btn btn-default pull-right" 
+								ng-class="{'active' : isMuted(), '' : !isMuted()}" 
+								ng-click="toggleMute()"> Mute 
+						</a>
+						
+						<div ng-show="false" class="btn-group">
+							<a href="#" class="btn btn-inverse"><i class="fa fa-backward"></i></a>
+							<a href="#" class="btn btn-inverse"><i class="fa fa-backward"></i></a>
+							<a href="#" class="btn btn-inverse"><i class="fa fa-stop"></i></a>
+							<a href="#" class="btn btn-inverse"><i class="fa fa-play"></i></a>
+							<a href="#" class="btn btn-inverse"><i class="fa fa-pause"></i></a>
+							<a href="#" class="btn btn-inverse"><i class="fa fa-forward"></i></a>
+							<a href="#" class="btn btn-inverse"><i class="fa fa-fast-forward"></i></a>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<div class="channeldesc">
+				<h3><span>{{channelName()}}</span>
+					<small>10 Viewers</small>
+					<small>1200 Total Views</small>
+				</h3>
+				<h4><span>{{videoName()}}</span></h4>
+				<!--<p>Gledajte vesti i se drugo zivo i divo. Tose Proeski na repeat imame i drugi pesni i stvari sto treba da se slusaat a ne samo i pesni tuku i videa ima se .. po malku i Eminem pustame koga ke ni tekne. Hihihi, sledete ne</p>-->
+				<!-- the comment box -->
+
+			</div>
+			<div class="panel panel-primary">
+		      <div class="panel-heading">
+		        <h3 class="panel-title">Playlist Editor</h3>
+		      </div>
+		      <div class="panel-body">
+		        <div class="row">
+		        	<div class="col-md-6">
+						<form>
+							<label ng-show="channelReady() && isAdmin()">Enter URL to youtube video to add to playlist:</label>
+							<div ng-show="channelReady() && isAdmin()" class="row">
+								<label class="col-md-2">Url: </label>
+								<input ng-model="model.addVideoUrl" ng-change="parseVideoUrl()" ng-blur="parseVideoUrl()"
+										id="textinput" name="textinput" type="text" placeholder="video id" 
+										class="input-xlarge col-md-10">
+								
+								<label ng-show="nameInputEnabled" class="col-md-2">Name: </label>								
+								<input ng-show="nameInputEnabled" ng-model="model.addVideoName" 
+										id="textinput" name="textinput" type="text" placeholder="video name" 
+										class="col-md-10 input-xlarge">
+								
+								<button ng-disabled="!nameInputEnabled"
+										ng-click="addVideo(videoId, videoName)" class="btn btn-default pull-right">Add Video </button>
+							</div>
+						</form>
+		        	</div>
+					<div ng-class="isAdmin() ? 'col-md-6' : 'col-md-12'">
+						<div ng-repeat="(id, video) in videos()">
+							<div class="row">
+								<div ng-class="isAdmin() ? 'col-md-8' : 'col-md-12'">
+								
+									<button class="col-md-2 btn btn-default btn-xs" ng-click="toggleRepeatVideo(video.videoKey())"
+											ng-class="{'active': isOnRepeat(video.videoKey())}">
+										<span class="glyphicon glyphicon-repeat"></span>
+									</button>
+								
+									<button ng-click="changeVideo(video.videoKey())" class="col-md-10 btn btn-default" 
+											ng-class="video.videoKey() == currentVideoKey() ? 'active' : ''"
+											ng-show="!inEdit(video.videoKey())"
+											ng-disabled="video.videoKey() == currentVideoKey()"> {{video.videoName()}} 
+									</button>
+									<input  type="text" 
+											ng-esc="toggleRenameVideo(video.videoKey())"
+											ng-enter="changeName(video.videoKey())" 
+											ng-model="model.videoEdits[video.videoKey()]" ng-show="inEdit(video.videoKey())" class="col-md-12" 
+											style="text-align: center;"/>
+								</div>
+								<div class="col-md-4" ng-show="channelReady() && isAdmin()" >
+									<button ng-click="promoteVideo(video.videoKey())" type="button" ng-disabled="id == 0" class="col-md-6 btn btn-default btn-xs">
+										<span class="glyphicon glyphicon-chevron-up"></span>
+									</button>
+									<button ng-click="toggleRenameVideo(video.videoKey())" type="button" class="col-md-6 btn btn-default btn-xs"
+											ng-class="inEdit(video.videoKey()) ? 'active' : ''">
+										<span class="glyphicon glyphicon-pencil"></span>
+									</button>
+									<button ng-click="demoteVideo(video.videoKey())" type="button" ng-disabled="id == videos().length - 1" class="col-md-6 btn btn-default btn-xs">
+										<span class="glyphicon glyphicon-chevron-down"></span>
+									</button>
+									<button ng-click="removeVideo(video.videoKey())" type="button" class="col-md-6 btn btn-default btn-xs">
+										<span class="glyphicon glyphicon-remove"></span>
+									</button>
+								</div>
+							</div>
+						</div>
+		        	</div>
+		        </div>
+		      </div>
+		    </div>
+		</div>
+
+		<div class="col-lg-4">
+			  <div class="panel panel-primary">
+				<div class="panel-heading">
+					<h3 class="panel-title">Schedule </h3>
+				</div>
+				<div class="panel-body">
+					<div class="row">
+						<div class="col-md-12">
+							<div ng-repeat="(key, value) in getSchedule()">
+								<span style="width: 50px"><strong >{{value.videoName}}</strong></span>: {{value.duration}}
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="well">
+				<h4>Chat:</h4>
+				<form role="form">
+					<div class="form-group">
+						<textarea class="form-control" rows="12" readonly="readonly" style="background: white; cursor: default"></textarea>
+					</div>
+					<div class="form-group">
+						<textarea class="form-control" rows="1" style="resize: none"></textarea>
+					</div>
+					<button type="submit" class="btn btn-primary">Send</button>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<hr>
+	<div class="row">
+		<div class="col-lg-6">
+			<!-- /well -->
+			<div class="well">
+				<h4>Popular Blog Categories</h4>
+				<div class="row">
+					<div class="col-lg-6">
+						<ul class="list-unstyled">
+							<li><a href="#dinosaurs">Dinosaurs</a>
+							</li>
+							<li><a href="#spaceships">Spaceships</a>
+							</li>
+							<li><a href="#fried-foods">Fried Foods</a>
+							</li>
+							<li><a href="#wild-animals">Wild Animals</a>
+							</li>
+						</ul>
+					</div>
+					<div class="col-lg-6">
+						<ul class="list-unstyled">
+							<li><a href="#alien-abductions">Alien Abductions</a>
+							</li>
+							<li><a href="#business-casual">Business Casual</a>
+							</li>
+							<li><a href="#robots">Robots</a>
+							</li>
+							<li><a href="#fireworks">Fireworks</a>
+							</li>
+						</ul>
+					</div>
+				</div>
+			</div>
+
+		</div>
+
+		 <div class="col-lg-6">
+
+			  <div class="well">
+				<h4>Blog Search</h4>
+				<div class="input-group">
+					<input type="text" class="form-control">
+					<span class="input-group-btn">
+						<button class="btn btn-default" type="button">
+							<span class="glyphicon glyphicon-search"></span>
+						</button>
+					</span>
+				</div>
+				<!-- /input-group -->
+			</div>
+			
+		   </div>
+	</div>
+</div>

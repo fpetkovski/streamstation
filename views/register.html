@@ -1,0 +1,56 @@
+<!-- LIGHTBOX BOX REGISTER -->
+<div class="modal fade  in" ng-class="{in: animate}" ng-style="{'z-index': 1050 + index*10}" ng-transclude="" modal-window="" index="0" style="z-index: 1050;">
+	<div class="modal ng-scope" id="notifyModal" role="dialog" aria-labelledby="loginDialog">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button type="button" class="close" data-dismiss="modal" ng-click="cancel()">
+				<span aria-hidden="true">&times;</span>
+				<span class="sr-only">Close</span></button>
+	        <h4 class="modal-title" id="registerModal">Create an account</h4>
+	      </div>
+	      <div class="modal-body">
+	      	<!-- Start FORM FILIPCOOO -->
+	        <form class="form-horizontal" action="">
+				<fieldset>	
+					<!-- Email input-->
+					<div class="form-group">
+					  <label class="col-md-4 control-label" for="email">Email</label>  
+					  <div class="col-md-5">
+					  <input id="email" name="email" type="text" placeholder="johnny@johnnymail.com" class="form-control input-md">
+					  <span class="help-block">This will also be your username.</span>  
+					  </div>
+					</div>
+
+					<!-- Password input-->
+					<div class="form-group">
+					  <label class="col-md-4 control-label" for="password">Password</label>
+					  <div class="col-md-5">
+					    <input id="password" name="password" type="password" placeholder="" class="form-control input-md">
+					    
+					  </div>
+					</div>
+				</fieldset>
+				<div ng-show="hasErrors()" class="alert alert-danger" role="alert" style="text-align: center">
+					{{model.error.code}}
+				</div>
+		      </div>
+		      <div class="modal-footer">
+				<div class="col-md-4">
+					<input type="button" class="btn btn-primary pull-left" type="submit" value="Register">
+				</div>
+				<div class="col-md-4" ng-show="!isLoggedIn()">
+		        <!--<button type="button" class="btn btn-default" data-dismiss="modal" ng-click="cancel()">Close</button> -->
+					<span class="text-left pull-left"> OR </span>
+				</div>
+				<div class="col-md-4" ng-show="!isLoggedIn()">
+					<input type="button" class="btn btn-primary pull-right" type="submit" ng-click="anonymLogin()" value="Continue Anonymously">
+				</div>
+				
+		      </div>
+	      <!-- END FORM FILIPCOOO -->
+	      </form>
+		  
+	    </div>
+	  </div>
+	</div>

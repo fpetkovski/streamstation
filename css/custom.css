@@ -1,0 +1,154 @@
+@import url("http://code.jquery.com/ui/1.11.0/themes/smoothness/jquery-ui.css");
+@font-face {
+    font-family: 'bebas_neueregular';
+    src: url('../fonts/BebasNeue-webfont.eot');
+    src: url('../fonts/BebasNeue-webfont.eot?#iefix') format('embedded-opentype'),
+         url('../fonts/BebasNeue-webfont.woff') format('woff'),
+         url('../fonts/BebasNeue-webfont.ttf') format('truetype'),
+         url('../fonts/BebasNeue-webfont.svg#bebas_neueregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+.well,.btn {
+	border-radius:0;
+}
+.playlist-button {
+	width: 100%;
+}
+
+.nopadding {
+   padding: 0 !important;
+   margin: 0 !important;
+}
+
+body {
+	background: #f6f6f6;
+}
+body.homepage nav.navbar {
+	background: transparent;
+	font-size:12px;
+	text-transform: uppercase;
+	position: absolute;
+	top: 0;
+	width: 100%;
+	color: #fff;
+	display:none;
+}
+body.homepage nav.navbar .nav>li>a:hover, .nav>li>a:focus {
+text-decoration: none;
+background-color: transparent;
+}
+
+nav.navbar {
+	background:#fff;
+	color:#000;
+	box-shadow: 0 1px rgba(0,0,0,0.08);
+	border-radius: 0;
+	/* Dont u fucking dare: box-shadow: 1px 1px 1px 1px;*/
+}
+body.homepage .startmenu {
+	position: absolute;
+	top: 0;
+	width: 100%;
+	color: #fff;
+	margin-top:150px;
+	text-align:center;
+}
+body.homepage nav.navbar.show {
+	display:block;
+		box-shadow: none;
+
+}
+.button-control {
+	margin-top:15px;
+}
+.navbar-brand {
+	float: left;
+	height: 50px;
+	padding: 15px 15px 15px 10px;
+	font-size: 18px;
+	line-height: 20px;
+}
+body.homepage nav.navbar a {
+	color:#fff;
+}
+nav.navbar a {
+	color:#000;
+}
+nav.navbar a.navbar-brand {
+	font-family: "bebas_neueregular", sans-serif;
+	text-transform: uppercase;
+	font-size: 22px;
+}
+.alert {
+	border-radius: 0px;
+}
+
+.logo {
+	float:left;
+}
+.logo img {
+	height:30px;
+	margin:10px 0 0 10px;
+}
+video#video {
+	bottom: 0px;
+	right: 0px;
+	min-width: 100%;
+	min-height: 100%;
+	width: auto;
+	height: auto;
+	z-index: -1000;
+	overflow: hidden;
+}
+
+div#loading-screen {
+	text-align: center;
+	margin-top: 250;
+}
+
+ul.channellist {
+	margin:0;
+	padding:0;
+}
+ul.channellist li {
+	width: 24%;
+	float: left;
+	background: #fff;
+	margin-right: 1%;
+	border: 1px solid #ddd;
+	padding: 20px;
+	
+}
+ul.channellist li a {
+	
+	display: block;
+	
+}
+ul.channellist li a .thumb {
+	display:block;
+	height:120px;
+	margin-bottom:10px;
+}
+.meta p {
+	margin: 0;
+	font-size:11px;
+	color:#000;
+}
+p.plays {
+	float: left;
+	margin-right: 5px;
+	display: block;
+}
+
+p.watchers {
+	float:left;
+
+}
+
+/* SORTABLE LIST HAX */
+
+#sortable { list-style-type: none; margin: 0; padding: 0; width: 60%; }
+#sortable li { margin: 0 3px 3px 3px; padding-left: 1.5em; height: 18px; }
+#sortable li span { position: absolute; margin-left: -1.3em; }

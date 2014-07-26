@@ -1,0 +1,30 @@
+<video autoplay="" loop="" class="fillWidth" id="video">
+	<source src="http://vmax.eu/ventcamp_v0.9/main.mp4" type="video/mp4">
+	<source src="http://vmax.eu/ventcamp_v0.9/main.ogg" type="video/ogg">
+	<source src="http://vmax.eu/ventcamp_v0.9/main.webm" type="video/webm">
+</video>
+
+<div class="container startmenu">
+	<div class="col-md-4 col-md-offset-4">
+		<img src="img/whitelogo.png">
+		<div class="clearfix"></div>
+		<p>Create a channel and watch videos in sync with your friends or community</p>
+		<div class="button-control">
+			<a class="btn btn-success btn-lg" href="#">Create a channel</a>
+			<a class="btn btn-default btn-lg" href="#/channels">Explore channels</a>
+		</div>
+	</div>
+</div>
+
+
+	<nav ng-controller="headerController" class="navbar show" role="navigation">
+		<div class="col-md-12">
+			<ul class="nav navbar-nav pull-right">
+				<li><a ng-show="!loggedIn()" href="" ng-click="register()">Register</a>
+				</li>
+				<li><a ng-show="!loggedIn()" href="#/login">Login</a>
+				</li>		
+			</ul>
+		</div>
+	</nav>
+	

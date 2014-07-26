@@ -1,0 +1,51 @@
+
+<div class="modal fade  in" ng-class="{in: animate}" ng-style="{'z-index': 1050 + index*10}" ng-transclude="" modal-window="" index="0" style="z-index: 1050;">
+	<div class="modal ng-scope" id="notifyModal" role="dialog" aria-labelledby="loginDialog">
+	  <div class="modal-dialog">
+	    <div class="modal-content">
+	      <div class="modal-header">
+	        <button ng-click="cancel()" type="button" class="close">
+				<span >&times;</span>
+				<span class="sr-only">Close</span>
+			</button>
+	        <h4 class="modal-title" id="loginModal">Login</h4>
+	      </div>
+	      <div class="modal-body">
+	      	<!-- Start FORM FILIPCOOO -->
+	        <form class="form-horizontal" action="">
+				<fieldset>	
+					<!-- Email input-->
+					<div class="form-group">
+					  <label class="col-md-4 control-label" for="email">Email</label>  
+					  <div class="col-md-5">
+					  <input id="email" name="email" ng-enter="login()" ng-model="model.email" type="text" placeholder="johnny@johnnymail.com" class="form-control input-md">
+					  </div>
+					</div>
+
+					<!-- Password input-->
+					<div class="form-group">
+					  <label class="col-md-4 control-label" for="password">Password </label>
+					  <div class="col-md-5">
+					    <input id="password" name="password" ng-enter="login()" ng-model="model.password" type="password" placeholder="" class="form-control input-md">		
+					    <span class="help-block"><a href="/sessions/forgot_password">Damn it. I forgot my password.</a></span>  			    
+					  </div>
+					</div>
+				</fieldset>
+				<div ng-show="hasErrors()" class="alert alert-danger" role="alert" style="text-align: center">
+					{{model.error.code}}
+				</div>
+		      </div>
+		      <div class="modal-footer">
+		        <button type="button" ng-click="cancel()" class="btn btn-default" data-dismiss="modal">Close</button>
+		        <button type="button" ng-click="login()" ng-disabled="model.loggingIn" class="btn btn-primary" type="submit">
+					<span ng-show="model.loggingIn">Logging In</span>
+					<span ng-show="!model.loggingIn">Log In</span>
+					<span ng-show="model.loggingIn" class="fa fa-circle-o-notch fa-spin"></span>
+				</button>
+		      </div>
+	      <!-- END FORM FILIPCOOO -->
+	      </form>
+	    </div>
+	  </div>
+	</div>
+</div>
